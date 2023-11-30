@@ -7,6 +7,7 @@
 (setq mac-option-modifier 'meta)
 (tooltip-mode -1)
 (setq visible-bell t)
+(setq-default tab-width 4)
 
 (require 'package)
 (setq package-user-dir "~/tmp/elpa/")
@@ -32,26 +33,8 @@
 ;;; slime
 (setq inferior-lisp-program (executable-find "sbcl"))
 
-;;; keycast
-(load-file "~/keycast/keycast.el")
-;;(package-install 'keycast)
-(keycast-mode)
-;; (keycast-log-mode)
-(setq keycast-log-format "%-18K%C%R\n"
-      keycast-remove-tail-elements nil
-      keycast-log-frame-alist '((inhibit-switch-frame . t)
-                                (pop-up-frame-parameters . ((font . "DejaVu Sans Mono-12")
-                                                            (minibuffer . nil)))))
-(push '(self-insert-command nil nil) keycast-substitute-alist)
-
-(setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
-    projectile hydra flycheck company avy which-key helm-xref dap-mode))
-
-(when (cl-find-if-not #'package-installed-p package-selected-packages)
-  (package-refresh-contents)
-  (mapc #'package-install package-selected-packages))
-
-;; sample `helm' configuration use https://github.com/emacs-helm/helm/ for details
+;; sample `helm' configuration use https://github.com/emacs-helm/helm/ for
+;; details
 (helm-mode)
 (require 'helm-xref)
 (define-key global-map [remap find-file] #'helm-find-files)
@@ -74,9 +57,6 @@
   (require 'dap-cpptools)
   (yas-global-mode))
 
-(package-install 'eglot)
-
-(package-install 'company)
 (global-company-mode)
 
 (setq eldoc-echo-area-use-multiline-p nil)
@@ -86,13 +66,23 @@
 (define-key eglot-mode-map (kbd "C-c e f n") #'flymake-goto-next-error)
 (define-key eglot-mode-map (kbd "C-c e f p") #'flymake-goto-prev-error)
 (define-key eglot-mode-map (kbd "C-c e r") #'eglot-rename)
+
+;;; yasnippet
+(require 'yasnippet)
+
+(setq yas-snippet-dirs '("./snippets/"))
+(yas-global-mode 1)
+
+(setf fill-column 80)
+(add-hook 'latex-mode-hook #'auto-fill-mode)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(zzz-to-char slime move-text multiple-cursors eglot lsp-mode yasnippet lsp-treemacs helm-lsp projectile hydra flycheck company avy which-key helm-xref dap-mode)))
+   '(gpr-yasnippets yasnippet-lean slime move-text multiple-cursors eglot lsp-mode yasnippet lsp-treemacs helm-lsp projectile hydra flycheck company avy which-key helm-xref dap-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
