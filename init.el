@@ -1,4 +1,3 @@
-;; Don't show splash screen
 (global-display-line-numbers-mode t)
 (load-theme 'wombat t)
 (hl-line-mode 1)
@@ -8,14 +7,13 @@
 (xterm-mouse-mode 1)
 (setq visible-bell t)
 (setq-default tab-width 4)
+
 (setq inhibit-startup-message 't)
 (setq initial-major-mode 'fundamental-mode)
 (setq initial-scratch-message 'nil)
 (setq make-backup-files nil)
 
 (require 'package)
-;; (setq package-user-dir "~/tmp/elpa/")
-;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (require 'yasnippet)
@@ -54,10 +52,6 @@
 (add-hook 'latex-mode-hook #'auto-fill-mode)
 (add-hook 'coq-mode-hook #'company-coq-mode)
 (add-hook 'tuareg-mode-hook (lambda () (setq-local comment-start ";; ")))
-;; (add-hook 'tuareg-mode-hook 'merlin-mode)
-;; (add-hook 'caml-mode-hook 'merlin-mode) (add-hook 'lisp-mode-hook 'merlin-mode)
-
-;; (setq merlin-error-after-save nil) (setq merlin-command 'opam)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -72,6 +66,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
 ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
 ;; (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
 ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
