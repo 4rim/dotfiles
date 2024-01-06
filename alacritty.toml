@@ -1,0 +1,12 @@
+[shell]
+program = "/bin/zsh"
+
+[font]
+normal.family = "Iosevka"
+size = 11.0
+
+[window]
+opacity = 0.8
+
+[scrolling]
+history = 30000
