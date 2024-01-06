@@ -1,0 +1,58 @@
+Config { overrideRedirect = False
+    , font     = "Iosevka 12"
+    , additionalFonts = ["xft:FontAwesome-12"]
+    , bgColor  = "#271103"
+    , fgColor  = "#7C7143"
+    , position = TopH 15 L 100
+    , textOffset = 1
+    , commands = [ Run WeatherX "KRDU"
+		        [ ("clear", " ")
+		        , ("sunny", " ")
+		        , ("mostly clear", " ")
+		        , ("mostly sunny", " ")
+		        , ("partly sunny", "⛅")
+		        , ("fair", "🌑")
+		        , ("cloudy","☁ ")
+		        , ("overcast","☁ ")
+		        , ("partly cloudy", "⛅")
+		        , ("mostly cloudy", "🌧")
+		        , ("considerable cloudiness", " ")
+                        ]
+		    [ "--template", "<fn=1><skyConditionS></fn><tempC>°"
+		    , "-L", "10"
+                    , "-H", "25"
+                    , "--normal", "grey"
+		    , "--high", "lightgoldenrod4"
+                    , "--low", "darkseagreen4"
+                    ] 36000
+		    , Run Wireless "wlp4s0"
+		        [ "--template", "<fn=1>\xf1eb</fn><quality>"
+		        ] 50
+                    , Run Battery
+                        [ "--template", "<fc=#A5A171><acstatus><left></fc>"
+		        , "-L", "10", "-H", "90"
+		        , "-W", "0"
+		        , "-f", "\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240"
+		        , "--"
+		        , "-P"
+         	        , "-i", "<leftbar>"
+         	        , "-O", "\xf1e6"
+         	        , "-o", "<leftbar>"
+			] 100
+		    , Run Cpu
+                        [ "--template", "\xf2db<total>%"
+			, "-L", "3"
+                        , "-H", "50"
+                        ] 100
+		    , Run Alsa "default" "Master" 
+		        ["--template", "<fn=1>\xf028</fn><volume>%"]
+		    , Run DateZone "<fc=#A5A171>🕑%I:%M:%S %p</fc>" "en_US.UTF-8" "" "time" 10
+		    , Run DateZone "%d %B, %A" "ru_RU.UTF-8" "" "day" 7200
+                    , Run Kbd [("ru", "🌐RU"), ("us", "🌐US")]
+		    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog%} %day% {%cpu% %kbd% %alsa:default:Master% %wlp4s0wi% %battery% %KRDU%|%time%"
+       }
+
