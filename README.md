@@ -1,6 +1,6 @@
 # my dotfiles
 
-![screenshot of modest rice](./sc.png)
+![screenshot of modest rice](./screenshot.png)
 
 Minimal xmonad + xmobar configuration focused on vim-like keybindings and
 native command-line utilities over everything-is-a-nail browser use. I
