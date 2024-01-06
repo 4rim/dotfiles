@@ -1,10 +1,11 @@
-	let mapleader=" "
+        let mapleader=" "
 	set inccommand=" "
 	set wildmenu
 	set showmatch
+	set autoindent
 	filetype plugin indent on
 	syntax enable
-	let g:vimtex_view_method = 'skim'
+	let g:vimtex_view_method = 'zathura'
 	let g:vimtex_compiler_method = 'latexmk'
 	set conceallevel=2
 	let g:tex_conceal="abdgm"
@@ -22,24 +23,20 @@
 	let g:vimtex_quickfix_open_on_warning = 0
 
 	set history=4000
-	set nocompatible
-	set tabstop=4
+	set tabstop=8
+	set softtabstop=4
+	set shiftwidth=4
+	set expandtab
 	set laststatus=2
 	set showcmd
 	set cursorline
-	set softtabstop=4
 	set number
 	set relativenumber
-	set autoindent
 	set backspace=eol,indent,start
 	set linebreak
 	set termguicolors
-	set shiftwidth=4
 	set hlsearch
 	set belloff=all
-
-	set colorcolumn=80
-	highlight ColorColumn ctermbg=darkgray
 
 " gets rid of redundant mode display
 "	set noshowmode
@@ -69,10 +66,15 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
+" Haskell style prohibits tabs
+autocmd FileType hs set expandtab
+" Strip trailing whitespace
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 let b:ale_linters = {'javascript': ['eslint'], 'sh': ['shellcheck'], 'rust': ['analyzer']}
 
-let g:opamshare = substitute(system('opam var share'),'\n$','','''')
-     execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" let g:opamshare = substitute(system('opam var share'),'\n$','','''')
+"     execute \"set rtp+=" . g:opamshare . \"/merlin/vim"
 
 " PLUGINS ---------------------------------------------------------------- {{{
 
@@ -184,16 +186,13 @@ inoremap <silent><expr> <cr> "\<c-g>u\<CR>"
 
 " COLOR SCHEME --------------------------------------------------------------- {{{
 
-" set background=dark
-" let g:seoul256_background = 234
-" colo seoul256
-
 set t_Co=256
 set background=dark
-colorscheme PaperColor
+colorscheme desert
+hi Normal guibg=NONE ctermbg=NONE
 
 " for vim-airline
-let g:airline_theme='seagull'
+" let g:airline_theme='seagull'
 
 "}}}
 
